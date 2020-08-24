@@ -1,0 +1,158 @@
+<ion-header no-border>
+  <header [title]="'HomeScreen._Dashboard_' | translate"></header>
+</ion-header>
+<ion-content no-padding>
+  <ion-refresher (ionRefresh)="initData($event)">
+    <ion-refresher-content pullingIcon="arrow-round-down" pullingText="Pull to refresh" refreshingSpinner="crescent" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <!-- Payment -->
+  <ion-list>
+    <ion-list-header class="list_header">
+      {{'DashboardDetail._Payment_' | translate}}
+      <ion-note item-right>
+        {{dashboardData.Payment_Label}}
+      </ion-note>
+    </ion-list-header>
+    <ion-item>
+      <ion-icon name='cash' item-left color="dashboardColor"></ion-icon>
+      {{'DashboardDetail._OutstandingAmount_' | translate}}
+      <ion-note item-right>
+        {{dashboardData.CurrencySymbol}} {{roundUp(dashboardData.OutstandingAmount)}}
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name='cash' item-left color="dashboardColor"></ion-icon>
+      {{'DashboardDetail._UnbilledAmount_' | translate}}
+      <ion-note item-right>
+        {{dashboardData.CurrencySymbol}} {{roundUp(dashboardData.UnbilledAmount)}}
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name='cash' item-left color="dashboardColor"></ion-icon>
+      {{'DashboardDetail._LastBillAmount_' | translate}}
+      <ion-note item-right>
+        {{dashboardData.CurrencySymbol}} {{roundUp(dashboardData.LastMonthBillAmount)}}
+      </ion-note>
+    </ion-item>
+  </ion-list>
+
+  <!-- Case -->
+  <ion-list>
+    <ion-list-header class="list_header">
+      {{'DashboardDetail._Case_' | translate}}
+      <ion-note item-right>
+        {{dashboardData.Case_Label}}
+      </ion-note>
+    </ion-list-header>
+    <ion-item>
+      <ion-icon name='document' item-left color="dashboardColor"></ion-icon>
+      {{'DashboardDetail._InProcess_' | translate}}
+      <ion-note item-right>
+        {{dashboardData.InProgress}}
+      </ion-note>
+    </ion-item>
+    <!-- <ion-item>
+      <ion-icon name='jet' item-left color="dashboardColor"></ion-icon>
+        IN TRANSIT
+      <ion-note item-right>
+       {{roundUp(dashboardData.InTransit)}}
+      </ion-note>
+    </ion-item> -->
+    <ion-item>
+      <ion-icon name='bus' item-left color="dashboardColor"></ion-icon>
+      {{'DashboardDetail._Completed' | translate}}
+      <ion-note item-right>
+        {{dashboardData.JobDelivered}}
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name='document' item-left color="dashboardColor"></ion-icon>
+      {{'DashboardDetail._AllCases_' | translate}}
+      <ion-note item-right>
+        {{dashboardData.Allcases}}
+      </ion-note>
+    </ion-item>
+  </ion-list>
+
+
+  <!-- QUERY -->
+  <ion-list>
+    <ion-list-header class="list_header">
+      {{'DashboardDetail._Query' | translate}}
+      <ion-note item-right>
+        {{dashboardData.Query_Label}}
+      </ion-note>
+    </ion-list-header>
+    <ion-item>
+      <ion-icon name='md-help-circle' item-left color="dashboardColor"></ion-icon>
+      {{'DashboardDetail._TodaysQuery_' | translate}}
+      <ion-note item-right>
+        {{dashboardData.TodayQueries}}
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name='md-help-circle' item-left color="dashboardColor"></ion-icon>
+      {{'DashboardDetail._PendingQuery_' | translate}}
+      <ion-note item-right>
+        {{dashboardData.PendingQueries}}
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name='md-help-circle' item-left color="dashboardColor"></ion-icon>
+      {{'DashboardDetail._ResolvedQuery_' | translate}}
+      <ion-note item-right>
+        {{dashboardData.ClosedQueries}}
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name='md-help-circle' item-left color="dashboardColor"></ion-icon>
+      {{'DashboardDetail._AllQuery_' | translate}}
+      <ion-note item-right>
+        {{dashboardData.AllQueries}}
+      </ion-note>
+    </ion-item>
+  </ion-list>
+
+
+
+  <!-- REDO -->
+  <ion-list>
+    <ion-list-header class="list_header">
+      {{'DashboardDetail._Redo' | translate}}
+      <ion-note item-right>
+        {{dashboardData.Redo_Label}}
+      </ion-note>
+    </ion-list-header>
+    <ion-item>
+      <ion-icon name='ios-redo' item-left color="dashboardColor"></ion-icon>
+      {{'DashboardDetail._Last12Month_' | translate}}
+      <ion-note item-right>
+        {{roundUp(dashboardData.RedoP_12Months)}}%
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name='ios-redo' item-left color="dashboardColor"></ion-icon>
+      {{'DashboardDetail._Last6Month_' | translate}}
+      <ion-note item-right>
+        {{roundUp(dashboardData.RedoP_6Months)}}%
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name='ios-redo' item-left color="dashboardColor"></ion-icon>
+      {{'DashboardDetail._Last2Month_' | translate}}
+      <ion-note item-right>
+        {{roundUp(dashboardData.RedoP_3Months)}}%
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name='ios-redo' item-left color="dashboardColor"></ion-icon>
+      {{'DashboardDetail._Last30Days_' | translate}}
+      <ion-note item-right>
+        {{roundUp(dashboardData.RedoP_30Days)}}%
+      </ion-note>
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>

@@ -1,0 +1,24 @@
+<ion-header no-border>
+  <modal-toolbar [title]="'ChatScreen._SavedMedia_' | translate" (dismiss)="dismiss($event)"></modal-toolbar>
+  <ion-toolbar>
+    <ion-segment padding mode="ios" [(ngModel)]="selectedTab" color="primary" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="image">
+        {{'ChatScreen._Images_' | translate}}
+      </ion-segment-button>
+      <ion-segment-button value="video">
+        {{'ChatScreen._Videos_' | translate}}
+      </ion-segment-button>
+      <ion-segment-button value="audio">
+        {{'ChatScreen._Audios_' | translate}}
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <center-spinner [hidden]="filesInitiated"></center-spinner>
+  <div class="medias" padding>
+    <div class="media" *ngFor="let file of files;let i = index" [hidden]="isHidden(file)" (click)="openFile(file, i)" (press)="takeAction(file, i)">
+      <img [src]="file.thumbnail" [id]="'message-file-' + file.uuid" />
+    </div>
+  </div>
+</ion-content>

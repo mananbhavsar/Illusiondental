@@ -1,0 +1,28 @@
+<ion-header>
+  <modal-toolbar [title]="'Common._NotificationPreference_' | translate" (dismiss)="dismiss($event)"></modal-toolbar>
+</ion-header>
+<ion-content padding="">
+  <ion-list *ngIf="data">
+    <ion-item>
+      <ion-label>Pickup</ion-label>
+      <ion-toggle mode="ios" color="secondary" [(ngModel)]="data.Alert_Pickup"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Dispatch</ion-label>
+      <ion-toggle mode="ios" color="secondary" [(ngModel)]="data.Alert_Dispatch"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Communication</ion-label>
+      <ion-toggle mode="ios" color="secondary" [(ngModel)]="data.Alert_Communication"></ion-toggle>
+    </ion-item>
+  </ion-list>
+  <ion-grid padding>
+    <ion-row>
+      <ion-col>
+        <button ion-button block (click)="update()">
+          Update
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

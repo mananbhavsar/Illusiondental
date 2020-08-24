@@ -1,0 +1,101 @@
+<ion-header no-border>
+    <header [title]="title"></header>
+    <div [hidden]="selectedOffice === {}" *ngIf="selectedOffice && selectedOffice.CustomerName" class="office">{{selectedOffice.CustomerName}}</div>
+    <ion-segment padding mode="ios" [(ngModel)]="selectedTab" color="pickup" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="0">
+            {{titles[0]}}
+        </ion-segment-button>
+        <ion-segment-button value="1">
+            {{titles[1]}}
+        </ion-segment-button>
+    </ion-segment>
+</ion-header>
+<ion-content padding>
+    <center-spinner [hidden]="timeSlot"></center-spinner>
+    <ng-container *ngIf="timeSlot">
+        <ion-list radio-group [(ngModel)]="time" (ngModelChange)="selectTime()">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-6>
+                        <table style="width: 100%">
+                            <tr style="color:gray">
+                                <th class="th_position">
+                                    <ion-grid>
+                                        <ion-row>
+                                            <ion-col col-6>
+                                                <ion-icon name="sunny" text-right></ion-icon>
+                                            </ion-col>
+                                            <ion-col col-6>
+                                                {{'PickUP._Morning_' | translate}}
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-grid>
+                                </th>
+                            </tr>
+                            <tr *ngFor="let item of timeSlot.morningSlot" style=" color:#F3001B">
+                                <th class="th_position">
+                                    <ion-grid>
+                                        <ion-row>
+                                            <ion-col col-6>
+                                                <ion-radio [disabled]="isDisabled(item)" value={{item.time}}></ion-radio>
+                                            </ion-col>
+                                            <ion-col col-6>
+                                                <span *ngIf="item.active" class="time-color">{{item.displaytime}}</span>
+                                                <span *ngIf="!item.active">{{item.displaytime}}</span>
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-grid>
+                                </th>
+                            </tr>
+                        </table>
+                    </ion-col>
+                    <ion-col col-6>
+                        <table style="width: 100%">
+                            <tr style=" color:gray">
+                                <th class="th_position">
+                                    <ion-grid>
+                                        <ion-row>
+                                            <ion-col col-6>
+                                                <ion-icon name="partly-sunny" text-right></ion-icon>
+                                            </ion-col>
+                                            <ion-col col-6>
+                                                {{'PickUP._Evening_' | translate}}
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-grid>
+                                </th>
+                            </tr>
+                            <tr *ngFor="let item of timeSlot.eveningSlot" style="color:#F3001B">
+                                <th class="th_position">
+                                    <ion-grid>
+                                        <ion-row>
+                                            <ion-col col-6>
+                                                <ion-radio [disabled]="isDisabled(item)" value="{{item.time}}"></ion-radio>
+                                            </ion-col>
+                                            <ion-col col-6>
+                                                <span *ngIf="item.active" class="time-color">{{item.displaytime}}</span>
+                                                <span *ngIf="!item.active">{{item.displaytime}}</span>
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-grid>
+                                </th>
+                            </tr>
+                        </table>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-list>
+        <ion-grid>
+            <ion-row text-center>
+                <ion-col>
+                    <button ion-button full [disabled]="disablePickupButton" (click)="confirm()">
+                        {{'PickUP._Confirm_' | translate}}
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ng-container>
+    <ion-fab right bottom>
+        <call-fab type="PickUp"></call-fab>
+    </ion-fab>
+</ion-content>

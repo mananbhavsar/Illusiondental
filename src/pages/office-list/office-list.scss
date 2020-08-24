@@ -1,0 +1,14 @@
+page-office-list {
+    .search-highlight{
+        font-weight: 600;
+    }
+    ion-label {
+        &.label-md {
+            margin: 0;
+            .pending-count{
+                font-size: 12px;
+                color: color($colors, danger);
+            }
+        }
+    }
+}

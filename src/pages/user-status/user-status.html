@@ -1,0 +1,27 @@
+<ion-header>
+  <modal-toolbar [title]="'ChatScreen._StatusInfo_' | translate" (dismiss)="dismiss($event)"></modal-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list *ngIf="data.length !== 0;else empty_template">
+    <ion-item *ngFor="let user of data">
+      <h2>
+        {{user.UserName}}
+      </h2>
+      <p>
+        <ion-row>
+          <ion-col>
+            <ion-note>
+              {{user.LoginStatus}}
+            </ion-note>
+          </ion-col>
+          <ion-col text-right>
+            {{user.LastActivityDateTime}}
+          </ion-col>
+        </ion-row>
+      </p>
+    </ion-item>
+  </ion-list>
+  <ng-template #empty_template>
+    <empty></empty>
+  </ng-template>
+</ion-content>

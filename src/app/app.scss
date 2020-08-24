@@ -1,0 +1,161 @@
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../assets/fonts/Open Sans/OpenSans.ttf') format('truetype');
+    font-weight: 300;
+}
+
+
+/*
+Platform Wide styles
+*/
+
+$font-weight-regular: 400;
+$font-weight-bold: 500;
+$logo-padding: 3em;
+body {
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+.platform-mobile {
+    .item-label-floating {
+        .text-input-md {
+            margin-top: 4.5px !important;
+        }
+        &::last-child {
+            .text-input-md {
+                margin-top: 5px !important;
+            }
+        }
+    }
+}
+
+ion-menu {
+    ion-header {
+        ion-toolbar {
+            .toolbar-background {
+                background: color($colors, primary);
+            }
+            .toolbar-title {
+                color: white;
+            }
+        }
+    }
+}
+
+ion-card-header {
+    text-align: center;
+    font-size: 1.5em !important;
+    font-weight: bold;
+}
+
+.item-label-stacked .text-input-md,
+.item-label-floating .text-input-md {
+    margin-top: 6px;
+}
+
+.toast-md.danger .toast-wrapper {
+    background: color($colors, danger);
+}
+
+.card-md h2 {
+    font-size: 1.4em;
+    color: color($colors, primary);
+}
+
+form {
+    .list-ios {
+        .item-block {
+            &:first-child {
+                border-top: 0 none;
+            }
+            &:last-child {
+                border-bottom: 0 none;
+                .item-inner {
+                    border-bottom: 0.55px solid #c8c7cc;
+                }
+            }
+        }
+    }
+}
+
+ion-app.md {
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spin {
+    animation-name: spin;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #ccc;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.pull-right {
+    float: right;
+}
+
+.pull-left {
+    float: left;
+}
+
+.height-auto {
+    height: auto;
+}
+
+.width-full {
+    width: 100%;
+}
+
+.margin-left-1 {
+    margin-left: 1rem;
+}
+
+.error-message-block {
+    color: color($colors, 'danger');
+    padding: 0 16px;
+    font-size: 0.9em;
+    font-style: italic;
+    span {
+        display: block;
+        width: 100%;
+        &::before {
+            content: '* ';
+        }
+    }
+}
+
+.office {
+    font-size: 12px;
+    padding: 1px;
+    text-transform: uppercase;
+    background: gray;
+    color: white;
+    text-align: center;
+}
+.sub-heading{
+    padding: 3px;
+    text-transform: uppercase;
+    background: rgb(144, 144, 144);
+    color: white;
+    text-align: center;
+}

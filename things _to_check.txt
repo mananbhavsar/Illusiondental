@@ -1,0 +1,4 @@
+1. Add following line to StreamingMedia.m in cleanup()
+[self.viewController dismissViewControllerAnimated:NO completion:nil];
+
+2. 

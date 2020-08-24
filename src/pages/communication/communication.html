@@ -1,0 +1,89 @@
+<ion-header no-border>
+  <header [title]="title" [buttons]="[{icon:'search'}]" (buttonClicked)="headerButtonClicked($event)"></header>
+  <div [hidden]="selectedOffice === {}" *ngIf="selectedOffice && selectedOffice.CustomerName" class="office">
+    {{selectedOffice.CustomerName}}
+    <!-- <ion-spinner color="light"></ion-spinner> -->
+  </div>
+  <ion-searchbar [placeholder]="'Common._Search_' | translate" [hidden]="showSearchBar" [(ngModel)]="searchText" (ionInput)="getItems()"
+    showCancelButton="true" (ionCancel)="onCancel()">
+  </ion-searchbar>
+  <ion-segment padding mode="ios" [(ngModel)]="selectedTab" color="communication" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="Today">
+      {{'CommunicationPage._Today_' | translate}}
+    </ion-segment-button>
+    <ion-segment-button value="Pending">
+      {{'CommunicationPage._Pending_' | translate}}
+    </ion-segment-button>
+    <ion-segment-button value="All">
+      {{'CommunicationPage._All_' | translate}}
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+<ion-content padding>
+  <center-spinner [hidden]="items"></center-spinner>
+  <ion-list class="communications-list">
+    <ion-item *ngFor="let item of items | orderBy:'ResponseDateTimeInMili':true;trackBy:item?.TicketNo; let i=index;" detail-push
+      [hidden]="isHidden(item)" (click)="openChat(item, i)">
+      <h2>
+        {{item.Patient}}
+        <ion-badge *ngIf="item.UnreadCount" color="primary">{{item.UnreadCount}} </ion-badge>
+      </h2>
+      <p>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              {{'CommunicationPage._Doctor_' | translate}}
+            </ion-col>
+            <ion-col ion-note>{{item.Doctor}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              {{'CommunicationPage._ImpressionNo_' | translate}}
+            </ion-col>
+            <ion-col ion-note>{{item.ImpressionNo}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              {{'CaseStatus._ReceivedDate_' | translate}}
+            </ion-col>
+            <ion-col ion-note>{{item.formatedImpressionDateTime}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              {{'CaseStatus._ExpectedDate_' | translate}}
+            </ion-col>
+            <ion-col ion-note>{{item.DueDate}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              {{'CommunicationPage._ReferenceEntryNo' | translate}}
+            </ion-col>
+            <ion-col ion-note>{{item.ReferenceEntryNo}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              {{'CommunicationPage._Satus_' | translate}}
+            </ion-col>
+            <ion-col ion-note [ngClass]="getStatusColor(item.QueryStatus)">{{getStatusLabel(item.QueryStatus)}}</ion-col>
+          </ion-row>
+          <!-- <ion-row>
+            <ion-col text-left>
+              <button ion-button color="casestatus" icon-left small (click)="openRx(item, i, $event)">
+                <ion-icon name="ios-paper"></ion-icon>
+                {{'CaseStatus._OpenRx_' | translate}}
+              </button>
+            </ion-col>
+          </ion-row> -->
+        </ion-grid>
+      </p>
+      <ion-icon name="ios-arrow-forward" item-end></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <ion-item-divider text-center color="light" *ngIf="page === -1">
+    {{'Common._NothingToShow_' | translate}}
+  </ion-item-divider>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="hasInternet">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

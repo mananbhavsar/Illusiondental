@@ -1,0 +1,51 @@
+<ion-header no-border class="intro">
+    <ion-navbar no-border-bottom>
+        <ion-buttons end *ngIf="showSkip">
+            <button ion-button (click)="startApp()" ion-text color="white">Skip</button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-slides pager="true" (ionWillChange)="onSlideChangeStart($event)">
+        <ion-slide>
+            <div class="slide_header">
+                <img src="assets/img/screen_1.png" class="slide-image" />
+            </div>
+            <h2 class="slide-title">Some fancy text</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                magna aliqua</p>
+        </ion-slide>
+
+        <ion-slide>
+            <div class="slide_header">
+                <img src="assets/img/screen_2.png" class="slide-image" />
+            </div>
+            <h2 class="slide-title">Some Fancy Text</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                magna aliqua</p>
+        </ion-slide>
+
+        <ion-slide>
+            <div class="slide_header">
+                <img src="assets/img/screen_3.png" class="slide-image" />
+            </div>
+            <h2 class="slide-title">Some Fancy Text</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                magna aliqua</p>
+        </ion-slide>
+
+        <ion-slide>
+            <div class="slide_header">
+                <img src="assets/img/screen_4.png" class="slide-image" />
+            </div>
+            <h2 class="slide-title">Some Fancy Text</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                magna aliqua</p>
+            <button ion-button ion-text color="primary" (click)="startApp()">
+                Let's Start
+            </button>
+        </ion-slide>
+
+    </ion-slides>
+</ion-content>

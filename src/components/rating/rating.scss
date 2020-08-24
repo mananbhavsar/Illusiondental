@@ -1,0 +1,18 @@
+rating {
+    .stars {
+        display: flex;
+        justify-content: center;
+        ion-grid {
+            width: 14em;
+        }
+    }
+    ion-row {
+        &.row {
+            border: 0 none;
+        }
+    }
+    ion-icon {
+        color: #e7711b;
+        font-size: 3rem;
+    }
+}

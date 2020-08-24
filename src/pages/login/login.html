@@ -1,0 +1,40 @@
+<ion-content class="login">
+    <ion-grid class="slide_header">
+
+        <logo></logo>
+        <ion-row>
+            <div id="login-box">
+                <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
+                    <ion-list>
+                        <ion-item>
+                            <ion-label ion-text color="primary" floating>
+                                {{'LoginPage._login_name_' | translate}}
+                            </ion-label>
+                            <ion-input formControlName="login_name" autofocus required type="text" [placeholder]="'LoginPage._login_name_' | translate" name="login_name"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label ion-text color="primary" floating>
+                                {{'LoginPage._password_' | translate}}
+                            </ion-label>
+                            <ion-input required formControlName="password" type="password" [placeholder]="'LoginPage._password_' | translate" name="password"></ion-input>
+                        </ion-item>
+                    </ion-list>
+                    <button ion-button block type="submit" [disabled]="!loginForm.valid">
+                        {{'LoginPage._log_in' | translate}}
+                    </button>
+                </form>
+            </div>
+
+        </ion-row>
+
+        <ion-row>
+            <ion-col text-center class="inline-links">
+                <a class="display-inline" (click)="onForgotPassword()">
+                    {{'LoginPage._Forgot_Password' | translate}}
+                </a>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+
+</ion-content>

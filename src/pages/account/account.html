@@ -1,0 +1,21 @@
+<ion-header no-border>
+    <header title="My Account"></header>
+</ion-header>
+<ion-content>
+    <div class="settings">
+        <ion-list inset>
+            <ion-item (click)="openEditProfile()">
+                <h2>Edit Profile</h2>
+                <ion-icon name="arrow-forward" item-right></ion-icon>
+            </ion-item>
+            <ion-item (click)="openChangePassword()">
+                <h2>Change Password</h2>
+                <ion-icon name="arrow-forward" item-right></ion-icon>
+            </ion-item>
+            <ion-item (click)="openNotifications()" *ngIf="user && (user.LoginTypeID !== global.LoginType.Group)">
+                <h2>Notification Preferences</h2>
+                <ion-icon name="arrow-forward" item-right></ion-icon>
+            </ion-item>
+        </ion-list>
+    </div>
+</ion-content>

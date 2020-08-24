@@ -1,0 +1,9 @@
+<ion-header>
+  <header [title]="'Common._Disclaimer' | translate"></header>
+</ion-header>
+<ion-content padding>
+  <center-spinner *ngIf="data === null;else dataFetched"></center-spinner>
+  <ng-template #dataFetched>
+    <div [innerHTML]="data"></div>
+  </ng-template>
+</ion-content>

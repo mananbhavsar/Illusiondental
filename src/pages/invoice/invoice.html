@@ -1,0 +1,48 @@
+<ion-header no-border>
+  <header [title]="title"></header>
+  <!-- <div [hidden]="selectedOffice === {}" class="office">{{selectedOffice.CustomerName}}</div> -->
+  <div class="sub-heading">Last six invoices</div>
+</ion-header>
+<ion-content>
+  <!-- <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button full icon-left (click)="makePayment()">
+          <ion-icon name="ios-card"></ion-icon>
+          Make Payment
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+  <center-spinner [hidden]="items"></center-spinner>
+  <ion-list class="cases">
+    <ion-item *ngFor="let item of items;let i = index" (click)="openInvoice(item, i)" text-wrap>
+      <p>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              {{'Invoice._InvoiceNo_' | translate}}
+            </ion-col>
+            <ion-col ion-note>{{item.InvoiceNo}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              {{'Invoice._InvoiceDate_' | translate}}
+            </ion-col>
+            <ion-col ion-note>{{item.InvoiceDate}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              {{'Invoice._NetAmount_' | translate}}
+            </ion-col>
+            <ion-col ion-note>{{item.NetAmount}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </p>
+      <ion-icon *ngIf="item.URL" name="ios-arrow-forward" item-end></ion-icon>
+    </ion-item>
+  </ion-list>
+  <ion-fab right bottom>
+    <call-fab type="InVoice"></call-fab>
+</ion-fab>
+</ion-content>

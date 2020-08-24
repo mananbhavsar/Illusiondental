@@ -1,0 +1,53 @@
+page-communication {
+    ion-list.communications-list {
+        ion-label {
+            width: 100%;
+            margin: 5px 8px 5px 0;
+            h2 {
+                display: block;
+                width: 100%;
+                font-size: 1em;
+                ion-badge {
+                    float: right;
+                }
+            }
+        }
+        p {
+            display: block;
+            width: 100%;
+            ion-grid {
+                padding: 0;
+                ion-row {
+                    padding: 0;
+                    ion-col {
+                        padding: 0;
+                        margin: 0;
+                        font-size: 0.8em;
+                        &[ion-note] {
+                            text-align: end;
+                            &.danger {
+                                color: color($colors, danger);
+                            }
+                            &.secondary {
+                                color: color($colors, secondary);
+                            }
+                        }
+                        button {
+                            ion-icon {
+                                color: white;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        ion-icon {
+            color: #999;
+        }
+    }
+    ion-item-divider {
+        ion-label {
+            margin: 5px;
+        }
+    }
+}

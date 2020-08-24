@@ -1,0 +1,18 @@
+<ion-title>
+  <ion-row>
+    <ion-col>
+      <div>
+        {{title}}
+        <span class="totalBadgeCount" [innerText]="getTotalBadgeCount()"></span>
+      </div>
+      <small *ngIf="subTitle">{{subTitle}}</small>
+    </ion-col>
+    <ion-col col-2 *ngIf="badgeCount">
+      <div class="flex-center">
+        <ion-badge color="pickup">
+          {{getBadgeCount()}}
+        </ion-badge>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-title>

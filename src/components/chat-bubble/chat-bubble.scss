@@ -1,0 +1,167 @@
+chat-bubble {
+    .message {
+        display: inline-block;
+        position: relative;
+        max-width: 80%;
+        border-radius: 7px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
+        &.message-mine {
+            float: right;
+            background-color: #DCF8C6;
+        }
+        &.message-other {
+            float: left;
+            background-color: #FFF;
+            min-width: 105px;
+        }
+        &.message-other::before,
+        &.message-mine::before {
+            content: "";
+            position: absolute;
+            bottom: 3px;
+            width: 12px;
+            height: 19px;
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+        &.message-other::before {
+            left: -11px;
+            background-image: url(../assets/img/message-other.png)
+        }
+        &.message-mine::before {
+            right: -11px;
+            background-image: url(../assets/img/message-mine.png)
+        }
+        .message-header {
+            .message-user {
+                padding: 2px 5px;
+                font-size: 11px;
+                color: orange;
+            }
+        }
+        .message-body {
+            .download {
+                position: absolute;
+                width: 100%;
+                height: calc(100% - 19px);
+                background-color: rgba(100, 100, 100, 0.6);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 5px 5px 0 0;
+                &.message-other{
+                    height: calc(100% - 38px);
+                    border-radius: 0;
+                }
+                ion-icon {
+                    font-size: 3em;
+                    color: #eee;
+                    text-shadow: 1px 1px 0px #424242;
+                }
+                ion-spinner {
+                    circle {
+                        stroke-width: 5px;
+                        stroke: #eee;
+                    }
+                }
+            }
+            .downloading {
+                display: flex;
+                width: 160px;
+                height: 160px;
+                justify-content: center;
+                align-items: center;
+                ion-spinner {}
+            }
+            .text {
+                padding: 5px 7px;
+                word-wrap: break-word;
+                &::after {
+                    content: " \00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
+                    display: inline;
+                }
+            }
+            .picture {
+                &.done {
+                    padding: 4px 4px 0;
+                    width: 160px;
+                    height: 160px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    img {
+                        width: 160px;
+                        height: 160px;
+                        border-radius: 6px;
+                    }
+                }
+            }
+            .image-center-small {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                img {
+                    display: block;
+                    margin: auto;
+                    padding: 10px;
+                    width: 70px;
+                    height: 70px;
+                }
+            }
+            .audio {
+                audio-track {
+                    ion-item {
+                        background: transparent;
+                        .item-inner {
+                            border: 0 none;
+                            ion-label {
+                                display: none;
+                            }
+                            ion-grid {
+                                padding: 0;
+                                ion-col {
+                                    padding: 5px 5px 0;
+                                    .control-button {}
+                                    audio-track-progress-bar {
+                                        margin-top: 7px;
+                                        time {
+                                            display: none;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .message-footer {
+            text-align: right;
+            padding: 1px 10px;
+            .message-timestamp {
+                display: inline-block;
+                color: gray;
+                font-size: 12px;
+            }
+            .message-status {
+                display: inline-block;
+                margin-left: 5px;
+                font-size: 11px;
+                &.status-0 {
+                    color: grey
+                }
+                &.status-1 {
+                    color: #4fc3f7;
+                }
+                &.status-2 {
+                    color: #4fc3f7;
+                }
+                ion-icon {
+                    font-size: 1.4em;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,68 @@
+<ion-header>
+  <modal-toolbar [title]="title" [color]="isAligner ? 'aligners' : 'casestatus'" (dismiss)="dismiss($event)"></modal-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card *ngIf="item.Substatus === 'Job Dispatched'">
+    <ion-list>
+      <ion-item>
+        <ion-icon name="ios-medical" item-start></ion-icon>
+        {{'CaseStatus.Dispatch._Patient' | translate}}
+        <ion-note item-end>{{item.Patient}}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="ios-calendar" item-start></ion-icon>
+        {{'CaseStatus.Dispatch._DispatchDate' | translate}}
+        <ion-note item-end>{{item.formatedDispatchDate}}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="ios-bus" item-start></ion-icon>
+        {{'CaseStatus.Dispatch._DeliveryMode' | translate}}
+        <ion-note item-end>{{item.JobDeliveryMode}}</ion-note>
+      </ion-item>
+      <ion-item-group *ngIf="item.JobDeliveryMode === 'Delivery Person'">
+        <ion-item-divider *ngIf="item.JobDeliveryMode === 'Delivery Person'" color="light">
+          {{item.JobDeliveryMode}} {{'CaseStatus.Dispatch._Details' | translate}}
+        </ion-item-divider>
+        <ion-item>
+          <ion-icon name="ios-person" item-start></ion-icon>
+          {{'CaseStatus.Dispatch._PersonName' | translate}}
+          <ion-note item-end>{{item.DeliveryBoyEmployee}}</ion-note>
+        </ion-item>
+        <ion-item (click)="callNumber(item.MobileNo)">
+          <ion-icon name="ios-call" item-start></ion-icon>
+          {{'CaseStatus.Dispatch._MobileNumber' | translate}}
+          <ion-note item-end>{{item.MobileNo}}</ion-note>
+        </ion-item>
+      </ion-item-group>
+      <ion-item-group *ngIf="item.JobDeliveryMode == 'Courier'">
+        <ion-item-divider *ngIf="item.JobDeliveryMode == 'Courier'" color="light">
+          {{item.JobDeliveryMode}} {{'CaseStatus.Dispatch._Details' | translate}}
+        </ion-item-divider>
+        <ion-item>
+          <ion-icon name="ios-document" item-start></ion-icon>
+          {{'CaseStatus.Dispatch._Courier' | translate}}
+          <ion-note item-end>{{item.Courier}}</ion-note>
+        </ion-item>
+        <ion-item (click)="openURL(item.TrackingURL)">
+          <ion-icon name="logo-steam" item-start></ion-icon>
+          {{'CaseStatus.Dispatch._TrackingNo' | translate}}
+          <ion-note item-end>{{item.TrackingNo}}</ion-note>
+        </ion-item>
+      </ion-item-group>
+    </ion-list>
+  </ion-card>
+  <ion-card class="challans">
+    <h2 padding>Product Details:</h2>
+    <ion-grid>
+      <ion-row class="header" justify-content-center>
+        <ion-col col-6>Product</ion-col>
+        <ion-col>Tooth No</ion-col>
+      </ion-row>
+      <ion-row *ngFor="let item of product;let index=index; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }" class="row"
+        align-items-center>
+        <ion-col col-6 align-self-start>{{item.Product}}</ion-col>
+        <ion-col>{{item.ToothNo}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>

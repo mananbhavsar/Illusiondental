@@ -1,0 +1,34 @@
+<div class="message" [ngClass]="message.UserID === userID ? 'message-mine' : 'message-other'">
+  <div class="message-header" *ngIf="LoginTypeID === global.LoginType.Group && message.UserID !== userID">
+    <div class="message-user">{{message.From}}</div>
+  </div>
+  <div class="message-body" (click)="openFile()">
+    <div class="download" *ngIf="message.downloaded === false" [ngClass]="{'message-other': LoginTypeID === global.LoginType.Group && message.UserID !== userID }">
+      <ion-icon name="md-download" *ngIf="!message.downloading"></ion-icon>
+      <ion-spinner name="crescent" *ngIf="message.downloading"></ion-spinner>
+    </div>
+    <ng-container [ngSwitch]="message.MessageType">
+      <div *ngSwitchCase="'Text'" class="text" [innerHTML]="getTextMessage()"></div>
+      <div *ngSwitchCase="'Image'" class="picture" [ngClass]="message.downloaded ? 'done' : 'image-center-small'">
+        <img *ngIf="message.downloaded" [id]="'message-image-'+message.key" [src]="message.nativeURL || message.URL" width="160" height="160" />
+        <img *ngIf="message.downloaded === false" src="assets/img/camera.png" />
+      </div>
+      <div *ngSwitchCase="'Audio'" class="audio image-center-small" [ngClass]="{'done':message.downloaded}">
+        <img src="assets/img/audio.png" />
+      </div>
+      <div *ngSwitchCase="'Video'" class="video image-center-small" [ngClass]="{'done':message.downloaded}">
+        <img src="assets/img/video.png" />
+      </div>
+    </ng-container>
+  </div>
+  <div class="message-footer">
+    <div class="message-timestamp">{{ getTime(message.CreateAt)}}</div>
+    <div class="message-status" [ngClass]="'status-' + message.Status" [hidden]="isHidden()">
+      <ng-container [ngSwitch]="message.Status">
+        <ion-icon *ngSwitchCase="0" name="md-checkmark"></ion-icon>
+        <ion-icon *ngSwitchCase="1" [name]="[global.LoginType.Doctor, global.LoginType.Parent].indexOf(message.LoginTypeID) > -1 ? 'md-done-all' : 'md-checkmark'"></ion-icon>
+        <ion-icon *ngSwitchCase="2" name="md-done-all"></ion-icon>
+      </ng-container>
+    </div>
+  </div>
+</div>

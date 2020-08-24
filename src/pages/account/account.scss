@@ -1,0 +1,54 @@
+page-account {
+    .header {}
+    form {
+        width: 96%;
+        margin-left: 2rem;
+    }
+    a {
+        color: #303a46;
+        text-decoration: none;
+        margin-top: 1rem;
+        display: block;
+    }
+    .item {
+        margin-bottom: 2rem;
+        border-bottom: none !important;
+        border-top: none !important;
+    }
+    .item:first-child,
+    .item:last-child {
+        border-top: none;
+        border-bottom: none !important;
+    }
+    .item-inner {
+        border-bottom: none !important;
+    }
+    .item-input ion-input {
+        border-bottom: 1px solid #e6e7e9;
+        color: #8c96a0;
+        margin-left: 2rem;
+        padding-bottom: 0.3rem;
+    }
+    ion-label+ion-input .text-input {
+        margin-left: 0px;
+    }
+    ion-icon {
+        font-size: 2.5rem;
+    }
+    .footer {
+        ion-icon {
+            font-size: 4rem;
+            &:first-child {
+                margin-right: 7rem;
+            }
+        }
+        p {
+            margin-top: 2rem;
+            float: none;
+            text-align: center;
+            a {
+                display: inline;
+            }
+        }
+    }
+}

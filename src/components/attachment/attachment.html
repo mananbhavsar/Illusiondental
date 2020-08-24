@@ -1,0 +1,31 @@
+<ion-row class="attachments" *ngIf="editable">
+  <ion-col>
+    <button block ion-button color="primary" (click)="capture('image')">
+      <div>
+        <ion-icon name="ios-image"></ion-icon>
+        <label>
+          Gallery
+        </label>
+      </div>
+    </button>
+  </ion-col>
+  <ion-col>
+    <button block ion-button color="primary" (click)="capture('camera')">
+      <div>
+        <ion-icon name="ios-camera"></ion-icon>
+        <label>
+          Camera
+        </label>
+      </div>
+    </button>
+  </ion-col>
+</ion-row>
+<div class="attachment-progress">
+  <progress-bar [progress]="progresses[UUID]" *ngFor="let UUID  of progresses | keys"></progress-bar>
+</div>
+<div class="attachment-container" *ngIf="attachments">
+  <div class="attachment-thumb" *ngFor="let attachment of attachments;let i = index;">
+    <ion-icon name="ios-trash" (click)="removeAttachment(i)" color="danger" *ngIf="editable"></ion-icon>
+    <img [src]="attachment.file + '_160.jpg'" width="90" height="90" (click)="openAttachment(attachment.file)" />
+  </div>
+</div>

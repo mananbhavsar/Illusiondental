@@ -1,0 +1,8 @@
+<ion-toolbar ion-text [color]="color">
+  <title [title]="title" [subTitle]="subTitle" [badgeCount]="badgeCount"></title>
+  <ion-buttons end>
+    <button color="light" ion-button outline (click)="sendDismiss(null)">
+      {{'Common._Close' | translate}}
+    </button>
+  </ion-buttons>
+</ion-toolbar>

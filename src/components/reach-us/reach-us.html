@@ -1,0 +1,8 @@
+<ion-row class="footer">
+    <ion-col>
+        <p><span (click)="callNumber(global.support.landline)">Landline: {{global.support.landline}}</span> <br/> <span (click)="callNumber(global.support.mobile)">Mobile:{{global.support.mobile}}</span></p>
+        <p (click)="openEmail(global.support.email)" hidden="true">Email: {{global.support.email}}</p>
+        <!-- <p [hidden]="hideContactUsLink">Having trouble? <a href="#" ion-text color="primary" (click)=onContactUs()>Contact Us</a></p> -->
+        <p [hidden]="!_address" text-wrap>{{global.support.address}}</p>
+    </ion-col>
+</ion-row>

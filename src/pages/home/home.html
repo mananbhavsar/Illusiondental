@@ -1,0 +1,103 @@
+<ion-header no-border>
+    <header [title]="'HomeScreen._Home_' | translate"></header>
+    <!-- <div [hidden]="Customer === null" class="cutomer-name">{{Customer}}</div> -->
+    <div class="device-register" [ngSwitch]="deviceRegsiter">
+        <span class="gray" *ngSwitchCase="0">Not Connected</span>
+        <span class="pickup" *ngSwitchCase="1">Connecting</span>
+        <span class="secondary" *ngSwitchCase="2">Last connected at {{connectedTime | amLocal | amLocale:'en' | amDateFormat:'ddd Do, MMM YYYY, h:mm:ss a'}}</span>
+    </div>
+</ion-header>
+<ion-content no-padding>
+    <ion-refresher (ionRefresh)="refresh($event)">
+        <ion-refresher-content pullingIcon="arrow-round-down" pullingText="Pull to refresh" refreshingSpinner="crescent" refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <center-spinner *ngIf="stillLoading();else loadingFinished"></center-spinner>
+    <ng-template #loadingFinished>
+        <div [ngClass]="'division-' + availableCount" class="home-screen-division dashboard" *ngIf="isVisible('HomeScreen._Dashboard_')">
+            <ion-grid style="height: inherit;">
+                <ion-row style="height: 100%; align-items: center;" (click)="openDashboard()">
+                    <ion-col col-4 style="text-align:center;">
+                        <img src="assets/img/test7.png" height="70" width="80" style="padding-top: 10px;" />
+                    </ion-col>
+                    <ion-col style="color:white">
+                        <h5 style="margin-bottom:0px;">{{'HomeScreen._Dashboard_' | translate}}</h5>
+                        <p style="margin-bottom:0px;margin-top:0px; font-size: smaller;">{{'HomeScreen._DashboardSummary_' | translate}}</p>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+        <div [ngClass]="'division-' + availableCount" class="home-screen-division pickup" *ngIf="isVisible('HomeScreen._PickUp_')">
+            <ion-grid style="height: inherit;">
+                <ion-row style="height: 100%; align-items: center;" (click)="openPickup()">
+                    <ion-col col-4 style="text-align:center;">
+                        <img src="assets/img/test4.png" height="80" width="80" style="padding-top: 10px;" />
+                    </ion-col>
+                    <ion-col style="color:white">
+                        <h5 style="margin-bottom:0px;"> {{'HomeScreen._PickUp_' | translate}}
+                            <sup *ngIf="data.PickUpCount !== 0">
+                                <ion-badge style="background:gray">{{data.PickUpCount}}</ion-badge>
+                            </sup>
+                        </h5>
+                        <p style="margin-bottom:0px;margin-top:0px; font-size: smaller;">{{'HomeScreen._EasyPickup_' | translate}}</p>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+        <div [ngClass]="'division-' + availableCount" class="home-screen-division casestatus" *ngIf="isVisible('HomeScreen._CaseStatus_')">
+            <ion-grid style="height: inherit;">
+                <ion-row style="height: 100%; align-items: center;" (click)="openCaseSearch()">
+                    <ion-col col-4 style="text-align:center;">
+                        <img src="assets/img/test6.png" height="65" width="60" style="padding-top: 10px;" />
+                    </ion-col>
+                    <ion-col style="color:white">
+                        <h5 style="margin-bottom:0px;"> {{'HomeScreen._CaseStatus_' | translate}}
+                            <sup *ngIf="data.CaseSearchCount !== 0">
+                                <ion-badge style="background:gray">{{data.CaseSearchCount}}</ion-badge>
+                            </sup>
+                        </h5>
+                        <p style="margin-bottom:0px;margin-top:0px; font-size: smaller;">{{'HomeScreen._ViewCaseStatus' | translate}}</p>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+        <div [ngClass]="'division-' + availableCount" class="home-screen-division aligners" *ngIf="isVisible('HomeScreen._Aligners_')">
+            <ion-grid style="height: inherit;">
+                <ion-row style="height: 100%; align-items: center;" (click)="openAligners()">
+                    <ion-col col-4 style="text-align:center;">
+                        <img src="assets/img/test8.png" height="111" width="94" style="padding-top: 10px;" />
+                    </ion-col>
+                    <ion-col style="color:white">
+                        <h5 style="margin-bottom:0px;"> {{'HomeScreen._Aligners_' | translate}}
+                            <sup *ngIf="data.CommunicationCount !== 0">
+                                <ion-badge style="background:gray">{{data.AlignersCount}}</ion-badge>
+                            </sup>
+                        </h5>
+                        <p style="margin-bottom:0px;margin-top:0px; font-size: smaller;"> {{'HomeScreen._ViewAligners_' | translate}}</p>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+        <div [ngClass]="'division-' + availableCount" class="home-screen-division communication" *ngIf="isVisible('HomeScreen._Communication_')">
+            <ion-grid style="height: inherit;">
+                <ion-row style="height: 100%; align-items: center;" (click)="openCommunications()">
+                    <ion-col col-4 style="text-align:center;">
+                        <img src="assets/img/test5.png" height="70" width="65" style="padding-top: 10px;" />
+                    </ion-col>
+                    <ion-col style="color:white">
+                        <h5 style="margin-bottom:0px;"> {{'HomeScreen._Communication_' | translate}}
+                            <sup *ngIf="data.CommunicationCount !== 0">
+                                <ion-badge style="background:gray">{{data.CommunicationCount}}</ion-badge>
+                            </sup>
+                        </h5>
+                        <p style="margin-bottom:0px;margin-top:0px; font-size: smaller;"> {{'HomeScreen._ViewCommunication_' | translate}}</p>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </ng-template>
+    <!-- <button ion-button full (click)="openChat('TR-27513-GJ')">Open Chat</button> -->
+    <!-- <button ion-button full (click)="useLang('en')">Use en</button> -->
+    <!-- <button ion-button full (click)="useLang('fr')">Use fr</button> -->
+    <button ion-button full (click)="connectToServer('12345678')">register</button>
+</ion-content>

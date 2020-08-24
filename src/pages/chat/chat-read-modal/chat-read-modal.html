@@ -1,0 +1,38 @@
+<ion-header>
+  <modal-toolbar [title]="'ChatScreen._MessageInfo_' | translate" (dismiss)="dismiss($event)"></modal-toolbar>
+</ion-header>
+<ion-content>
+  <div class="chat">
+    <chat-bubble [id]="'message-'+message.key" class="message-wrapper" [message]="message" [userID]="userID" [ticket]="ticket"
+      [users]="chatUsers" [LoginTypeID]="loginTypeID"></chat-bubble>
+  </div>
+  <ion-list>
+    <ion-list-header>
+      <h2 class="read">
+        {{'ChatScreen._ReadBy_' | translate}}
+      </h2>
+    </ion-list-header>
+    <ion-item *ngFor="let read of reads | orderBy:'time':true">
+      <h2>{{read.name}}</h2>
+      <ion-note item-end>
+        {{getTime(read.time)}}
+      </ion-note>
+    </ion-item>
+    <ion-item class="more">
+      <ion-icon name="ios-more-outline"></ion-icon>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      <h2 class="unread">
+        {{'ChatScreen._UnreadBy' | translate}}
+      </h2>
+    </ion-list-header>
+    <ion-item *ngFor="let userId of chatUsers | keys" [hidden]="inRead(userId)">
+      <h2>{{chatUsers[userId].Name}}</h2>
+    </ion-item>
+    <ion-item class="more">
+      <ion-icon name="ios-more-outline"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

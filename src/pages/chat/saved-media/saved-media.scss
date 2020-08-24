@@ -1,0 +1,17 @@
+page-saved-media {
+    .medias {
+        display: block;
+        padding: 5px;
+        .media {
+            float: left;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 2.5px;
+            width: calc(33% - 5px);
+            max-width: 160px;
+            text-align: center;
+            img {}
+        }
+    }
+}

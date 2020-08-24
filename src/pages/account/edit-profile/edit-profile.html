@@ -1,0 +1,50 @@
+<ion-header>
+  <modal-toolbar [title]="'Common._EditProfile_' | translate" (dismiss)="dismiss($event)"></modal-toolbar>
+</ion-header>
+<ion-content padding="">
+  <form [formGroup]="editProfileForm" (ngSubmit)="update()">
+    <ion-list>
+      <ion-item>
+        <ion-label ion-text color="primary" floating>
+          Name
+        </ion-label>
+        <ion-input formControlName="name" autofocus required type="text" placeholder="Name" name="name"></ion-input>
+      </ion-item>
+      <div class="error-message-block" *ngIf="editProfileForm.controls.name.errors && (editProfileForm.controls.name.dirty || editProfileForm.controls.name.touched)">
+        <span *ngIf="editProfileForm.controls.name.errors.required">Name is required</span>
+      </div>
+      <ion-item>
+        <ion-label ion-text color="primary" floating>
+          Email
+        </ion-label>
+        <ion-input required formControlName="email" type="email" placeholder="Email" name="email"></ion-input>
+      </ion-item>
+      <div class="error-message-block" *ngIf="editProfileForm.controls.email.errors && (editProfileForm.controls.email.dirty || editProfileForm.controls.email.touched)">
+        <span *ngIf="editProfileForm.controls.email.errors.required">Email is required</span>
+        <span *ngIf="editProfileForm.controls.email.errors.pattern">Invalid email</span>
+      </div>
+      <ion-item>
+        <ion-label ion-text color="primary" floating>
+          Mobile Number
+        </ion-label>
+        <ion-input required minLength="10" maxLength="10" formControlName="mobile_number" type="tel" placeholder="Mobile Number"
+          name="mobile_number"></ion-input>
+      </ion-item>
+      <div class="error-message-block" *ngIf="editProfileForm.controls.mobile_number.errors && (editProfileForm.controls.mobile_number.dirty || editProfileForm.controls.mobile_number.touched)">
+        <span *ngIf="editProfileForm.controls.mobile_number.errors.required">Mobile Number is required</span>
+        <span *ngIf="editProfileForm.controls.mobile_number.errors.minlength">Mobile Number should be of 10 digits</span>
+        <span *ngIf="editProfileForm.controls.mobile_number.errors.maxlength">Mobile Number should be of 10 digits max</span>
+        <span *ngIf="editProfileForm.controls.mobile_number.errors.pattern">Invalid mobile number</span>
+      </div>
+    </ion-list>
+    <ion-grid padding>
+      <ion-row>
+        <ion-col>
+          <button ion-button block type="submit" [disabled]="!editProfileForm.valid">
+            Update
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

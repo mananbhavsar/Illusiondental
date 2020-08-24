@@ -1,0 +1,31 @@
+page-dashboard {
+    ion-list-header {
+        border-bottom: 1px solid color($colors, primary);
+        ion-label {
+            color: color($colors, primary);
+            font-size: 14px;
+        }
+        ion-note {
+            &.note-md {
+                color: #555;
+                font-size: 12px;
+            }
+        }
+    }
+    ion-list {
+        ion-item {
+            ion-icon {
+                color: color($colors, primary);
+            }
+            .item-inner {
+                ion-label {
+                    font-size: 12px;
+                }
+                ion-note {
+                    color: rgb(48, 46, 46);
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}

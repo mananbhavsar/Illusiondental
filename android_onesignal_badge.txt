@@ -1,0 +1,13 @@
+1: Add this to Menifest to disable Android Badge count
+   <meta-data android:name="com.onesignal.BadgeCount" android:value="DISABLE" />
+2: Copy this class to main package
+    BadgeHelper.Java
+3: Copy following to Menifest to link BadgeHelper to onesignal. This will call notification received
+    <service
+   android:name=".BadgeHelper"
+   android:permission="android.permission.BIND_JOB_SERVICE"
+   android:exported="false">
+   <intent-filter>
+      <action android:name="com.onesignal.NotificationExtender" />
+   </intent-filter>
+</service>

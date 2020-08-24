@@ -1,0 +1,50 @@
+page-feedback {
+    ion-list-header {
+        &.list-header-md {
+            margin-bottom: 0;
+            min-height: 1em;
+            background: #f1f1f1;
+            .item-inner {
+                .input-wrapper {
+                    ion-label {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+    ion-list {
+        &.list-md {
+            display: flex;
+            margin: 0;
+            ion-item {
+                .item-inner {
+                    margin: 0;
+                    font-size: 0.8em;
+                }
+            }
+        }
+    }
+    ion-grid {
+        &.grid{
+        padding: 20px 10px 10px;
+        }
+        ion-row {
+            border-bottom: 1px solid #ccc;
+            ion-label {
+                &.label-md {
+                    margin: 0;
+                }
+            }
+            ion-col {
+                &:first-child {
+                    color: #999;
+                    font-size: 0.8em;
+                }
+                &:last-child{
+                    text-align: right;
+                }
+            }
+        }
+    }
+}

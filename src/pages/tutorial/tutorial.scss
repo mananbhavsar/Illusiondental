@@ -1,0 +1,54 @@
+page-tutorial {
+    .toolbar-background {
+        background: color($colors, primary);
+        border-color: transparent;
+        border-bottom: none;
+    }
+    .slide_header {
+        background: color($colors, primary);
+        height: 60vh;
+        overflow: hidden;
+    }
+    h2 {
+        text-transform: uppercase;
+        font-size: 1.8rem;
+        font-weight: $font-weight-bold;
+    }
+    p {
+        text-align: center;
+        font-size: 1.3rem;
+        opacity: .5;
+        padding: 0px 10px;
+    }
+    .button {
+        text-transform: uppercase;
+        border-radius: 3rem;
+        display: block;
+        width: 70%;
+        margin: 0 auto;
+        height: 4.5rem;
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+    }
+    .swiper-pagination-bullet {
+        opacity: .1;
+    }
+    .swiper-pagination-bullet-active {
+        opacity: 1;
+        background: none;
+        border: 1px solid #c8c8c8;
+        width: 15px;
+        height: 15px;
+        vertical-align: bottom;
+    }
+    .slide-zoom {
+        height: 100%;
+    }
+    .slide-image {
+        margin:  0;
+    }
+    .button-inner {
+        color: white;
+    }
+}

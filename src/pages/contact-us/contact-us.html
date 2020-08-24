@@ -1,0 +1,37 @@
+<ion-header>
+  <modal-toolbar [title]="'Common._ContactUs_' | translate" (dismiss)="dismiss($event)"></modal-toolbar>
+</ion-header>
+<ion-content class="login">
+  <ion-grid class="slide_header">
+
+    <ion-row>
+      <div id="login-box">
+        <form [formGroup]="contactForm" (ngSubmit)="saveContactUs()">
+          <ion-list>
+            <ion-item>
+              <ion-label ion-text color="primary" floating>Full Name</ion-label>
+              <ion-input formControlName="full_name" required [(ngModel)]="contact.full_name" name="full_name" type="text" placeholder="Full Name"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label ion-text color="primary" floating>Mobile Number</ion-label>
+              <ion-input formControlName="mobile_number" required [(ngModel)]="contact.mobile_number" name="mobile_number" type="tel" placeholder="Mobile Number"
+                name="mobile_number"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label ion-text color="primary" floating>Email Address</ion-label>
+              <ion-input formControlName="email_address" [(ngModel)]="contact.email_address" name="email_address" type="email" placeholder="Email Address"
+                name="email_address"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label ion-text color="primary" floating>Message</ion-label>
+              <ion-input formControlName="message" required [(ngModel)]="contact.message" name="message" type="text" placeholder="Message"
+                name="message"></ion-input>
+            </ion-item>
+          </ion-list>
+          <button ion-button color="button" type="submit" color="button" [disabled]="!contactForm.valid" ion-button block>Send</button>
+        </form>
+      </div>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,14 @@
+<ion-content>
+    <ion-refresher (ionRefresh)="checkForInternet($event)">
+        <ion-refresher-content pullingIcon="arrow-round-down" pullingText="Pull to refresh" refreshingSpinner="crescent" refreshingText="checking connectivity...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-grid class="slide_header">
+        <ion-row>
+            <ion-col text-center class="content">
+                <ion-icon name="ios-wifi-outline" ion-text color="primary"></ion-icon>
+                <p padding-horizontal>Kindly connect to Internet to experience wonder of the App</p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

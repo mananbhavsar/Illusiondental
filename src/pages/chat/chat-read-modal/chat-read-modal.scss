@@ -1,0 +1,32 @@
+page-chat-read-modal {
+    .chat {
+        background-image: url(../assets/img/chat-background.jpg);
+        background-color: #E0DAD6;
+        background-repeat: repeat-y;
+        background-size: 100%;
+        display: inline-block;
+        min-height: 100px;
+        padding: 5%;
+        width: 100%;
+    }
+    ion-list {
+        &.list-md {
+            margin-top: -4px;
+            ion-list-header {
+                background: #ebebed;
+                .read{
+                    color: color($colors, secondary);
+                }
+                .unread{
+                    color: color($colors, danger);
+                }
+            }
+            ion-item {
+                &.more {
+                    text-align: center;
+                    font-size: 2em;
+                }
+            }
+        }
+    }
+}

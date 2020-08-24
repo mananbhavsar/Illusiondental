@@ -1,0 +1,33 @@
+<ion-header no-border>
+  <header [title]="title" subTitle="Patient List" [buttons]="[{icon:'search'}]" (buttonClicked)="headerButtonClicked($event)"></header>
+  <div [hidden]="selectedOffice === {}" class="office">{{selectedOffice.CustomerName}}</div>
+  <ion-searchbar [placeholder]="'Common._Search_' | translate" [hidden]="showSearchBar" [(ngModel)]="searchText" (ionInput)="getItems(searchText)"
+    showCancelButton="true" (ionCancel)="onCancel()">
+  </ion-searchbar>
+</ion-header>
+
+<ion-content>
+  <center-spinner [hidden]="patients"></center-spinner>
+  <ion-list class="cases">
+    <ion-item *ngFor="let patient of patients;let i = index" (click)="openPatientCase(patient, i)" text-wrap>
+      <h2>
+        {{patient.Patient}}
+        <ion-badge *ngIf="patient.Count" color="primary">
+          {{patient.Count}}
+        </ion-badge>
+      </h2>
+      <ion-icon name="ios-arrow-forward" item-end></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <ion-item-divider text-center color="light" *ngIf="page === -1">
+    {{'Common._NothingToShow_' | translate}}
+    <ion-icon name="md-sad-outline"></ion-icon>
+  </ion-item-divider>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="hasInternet && page > -1">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <ion-fab right bottom>
+    <call-fab type="Aligners"></call-fab>
+  </ion-fab>
+</ion-content>

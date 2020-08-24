@@ -1,0 +1,65 @@
+page-home {
+    .device-register {
+        text-align: center;
+        span {
+            color: white;
+            display: block;
+            &.gray {
+                background-color: gray;
+            }
+            &.secondary {
+                background-color: color($colors, secondary);
+            }
+            &.pickup {
+                background-color: color($colors, pickup);
+            }
+        }
+    }
+    .cutomer-name {
+        padding: 5px;
+        text-transform: uppercase;
+        background: gray;
+        color: white;
+        text-align: center;
+    }
+    .home-screen-division {
+        display: flex;
+        justify-content: center;
+        &.dashboard {
+            background-color: color($colors, dashboard);
+        }
+        &.casestatus {
+            background-color: color($colors, casestatus);
+        }
+        &.pickup {
+            background-color: color($colors, pickup);
+        }
+        &.aligners {
+            background-color: color($colors, aligners);
+        }
+        &.communication {
+            background-color: color($colors, communication);
+        } //for division min height
+        &.division-0{
+            min-height: 0%
+        }
+        &.division-1{
+            min-height: 100%
+        }
+        &.division-2{
+            min-height: 50%
+        }
+        &.division-3{
+            min-height: 33.33%
+        }
+        &.division-4{
+            min-height: 25%
+        }
+        &.division-5{
+            min-height: 20%
+        }
+        &.division-6{
+            min-height: 16.66%
+        }
+    }
+}

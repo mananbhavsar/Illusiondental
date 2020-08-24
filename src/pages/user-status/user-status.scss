@@ -1,0 +1,26 @@
+page-user-status {
+    ion-content {
+        ion-list {
+            ion-item {
+                border-bottom: 1px solid gainsboro !important;
+                .item-inner {
+                    border-bottom: none !important;
+                    .input-wrapper {
+                        ion-label {
+                            &.label-md{
+                                margin: 5px 0 0 0  !important;
+                            }
+                        }
+                    }
+                }
+                p{
+                    ion-row{
+                        ion-col{
+                            font-size: 1em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

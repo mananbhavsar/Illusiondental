@@ -1,0 +1,194 @@
+page-chat {
+    ion-header {
+        ion-toolbar.sub-header {
+            min-height: 0px;
+            .toolbar-background {
+                background: gray;
+            }
+            ion-title {
+                .toolbar-title {
+                    color: white;
+                    font-size: 1em;
+                    text-align: center;
+                }
+            }
+        }
+    }
+    .inputfile {
+        position: absolute;
+        opacity: 0;
+        width: 3.1px;
+        height: 3.1px;
+    }
+    .header-picture {
+        max-width: 33px;
+        max-height: 33px;
+        width: 100%;
+        height: 90%;
+        border-radius: 50%;
+    }
+    .cameraOpen {
+        height: 100%;
+        width: 100%;
+        background-color: #ccc;
+        border: 10px solid #ddd;
+    }
+    .chat {
+        background-image: url(../assets/img/chat-background.jpg);
+        background-color: #E0DAD6;
+        background-repeat: repeat-y;
+        background-size: 100%;
+        height: calc(100% - 0px);
+    }
+    .message-list {
+        margin-top: 12px;
+        padding: 0 5%; // .chats-list {
+        // .chat-item {
+        // display: block;
+        // width: 100%;
+        // height: 69px;
+        chat-bubble {
+            margin-bottom: 5px;
+            display: inherit;
+            &::after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+        } // }
+        // }
+        .no-more {
+            text-align: center;
+            color: rgba(69, 90, 100, 0.95);
+            background: rgba(225, 245, 254, 0.92);
+            margin: 0 auto 10px;
+            display: block;
+            width: fit-content;
+            max-width: 50%;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 10px;
+            font-style: italic;
+        }
+    }
+    .typing-container {
+        .typing {
+            background: white;
+            color: #333;
+            margin: 4px auto;
+            padding: 3px;
+            border-radius: 5px;
+            font-size: 10px;
+            font-style: italic;
+            text-align: center;
+            display: block;
+            width: fit-content;
+        }
+    }
+    .footer-chat {
+        background: #efefef;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        .button[icon-only]:not(.send-button) {
+            max-width: 1.8em;
+        }
+        .item-input-wrapper {
+            width: calc(100% - 131px);
+            display: inline-block;
+            margin-top: 4px;
+            ion-textarea {
+                border-radius: 5px;
+                padding: 5px;
+                background-color: #FFF;
+                border: 1px solid #ccc;
+                display: inline-block;
+                width: 100%;
+                textarea {
+                    border-radius: 5px;
+                    padding: 5px;
+                    background-color: #FFF;
+                    border: 1px solid #ccc;
+                    display: inline-block;
+                    width: 100%;
+                    margin: 0;
+                    max-height: 190px;
+                    overflow: auto;
+                }
+            }
+            textarea {
+                border-radius: 5px;
+                padding: 5px;
+                background-color: #FFF;
+                border: 1px solid #ccc;
+                display: inline-block;
+                width: 100%;
+                margin: 0;
+                max-height: 190px;
+                overflow: auto;
+                min-height: 30px;
+            }
+            &.send {
+                width: calc(100% - 73px);
+            }
+        }
+        .button.button-icon {
+            // margin: 0 10px;
+        }
+        .send-button {
+            font-size: 11px;
+            ion-spinner {
+                circle {
+                    fill: #FFF;
+                }
+            }
+        }
+        .buttons-seperator {
+            color: color($colors, primary);
+            max-width: 0.9em !important;
+        }
+        .recording {
+            .timer {
+                font-style: italic;
+                font-size: 14px;
+                height: 36px;
+                vertical-align: middle;
+                display: inline-flex;
+                align-items: center;
+                margin: 6px 0 0;
+            }
+        }
+    }
+    ion-action-sheet {
+        &.text-left {
+            .button-inner {
+                justify-content: left;
+            }
+        }
+    }
+    .file-uploader-progress {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        background: rgba(90, 90, 90, 0.75);
+        display: flex;
+        align-items: center;
+        z-index: 100;
+        .progress-outer {
+            display: block;
+            width: 80%;
+            margin: 0 auto;
+            .progress-inner {
+                min-width: 15%;
+                white-space: nowrap;
+                overflow: hidden;
+                padding: 5px;
+                border-radius: 20px;
+                background-color: map-get($colors, primary);
+            }
+        }
+    }
+}

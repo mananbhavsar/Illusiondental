@@ -1,0 +1,25 @@
+page-offline {
+    .slide_header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        p {
+            color: #8a949d;
+            float: right;
+            margin-right: -2rem;
+            margin-top: 1rem;
+        }
+        .content {
+            ion-icon {
+                font-size: 13em;
+                width: 100%;
+            }
+            p {
+                width: 100%;
+                padding: 0 1em;
+                margin: 0;
+            }
+        }
+    }
+}

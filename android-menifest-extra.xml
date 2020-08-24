@@ -1,0 +1,6 @@
+<meta-data android:name="com.onesignal.BadgeCount" android:value="DISABLE" />
+        <service android:exported="false" android:name=".BadgeHelper" android:permission="android.permission.BIND_JOB_SERVICE">
+            <intent-filter>
+                <action android:name="com.onesignal.NotificationExtender" />
+            </intent-filter>
+        </service>

@@ -1,0 +1,28 @@
+page-case-status-modal {
+    ion-card {
+        ion-list {
+            ion-item {
+                ion-label {
+                    font-size: 0.9em !important;
+                }
+                ion-note {
+                    color: #555 !important;
+                    font-size: 1em !important;
+                }
+            }
+        }
+        &.challans {
+            ion-grid {
+                ion-row {
+                    border-top: 1px solid #ccc;
+                    font-size: 0.9em;
+                    &.header {
+                        background-color: #f4f4f4;
+                        border-bottom: 1px solid #ccc;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,285 @@
+<<<<<<< HEAD
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams, Events, Platform } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
+=======
+>>>>>>> development
+
+import { Component } from '@angular/core';
+import { Network } from '@ionic-native/network';
+import { OneSignal } from '@ionic-native/onesignal';
+import { Storage } from '@ionic/storage';
+import { TranslateService } from "@ngx-translate/core";
+<<<<<<< HEAD
+
+import { OneSignal } from '@ionic-native/onesignal';
+
+=======
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Events, IonicPage, NavController, Platform } from 'ionic-angular';
+import * as _ from 'underscore';
+>>>>>>> development
+import { Global } from '../../app/global';
+import { ConnectionProvider } from '../../providers/connection/connection';
+import { OfficeServiceProvider } from '../../providers/office-service/office-service';
+import { UserProvider } from '../../providers/user/user';
+import { AlignersPage } from '../aligners/aligners';
+import { CaseStatusPage } from '../case-status/case-status';
+import { CommunicationPage } from '../communication/communication';
+import { DashboardPage } from "../dashboard/dashboard";
+import { PickupPage } from "../pickup/pickup";
+
+
+
+
+
+
+@IonicPage()
+@Component({
+    selector: 'page-home',
+    templateUrl: 'home.html',
+})
+export class HomePage {
+    global: any = {};
+    data: any = {
+        CaseSearchCount: 0,
+        CommunicationCount: 0,
+        PickUpCount: 0,
+        AlignerCount: 0,
+        Total: 0,
+    };
+    loginType: number = 0;
+    isDentalLogin: boolean = false;
+    isNormalLogin: boolean = false;
+    Customer: string = null;
+
+    menu: Array<any> = null;
+    /**
+     * 0 => not connected
+     * 1 => connecting
+     * 2 => connected
+     */
+    deviceRegsiter: number = 0;
+    connectedTime: string = null;
+
+    availableCount: number = 0;
+    availableTabs: Array<string> = [
+        'HomeScreen._Dashboard_',
+        'HomeScreen._PickUp_',
+        'HomeScreen._CaseStatus_',
+        'HomeScreen._Aligners_',
+        'HomeScreen._Communication_',
+    ];
+    constructor(
+        public navCtrl: NavController,
+        public connection: ConnectionProvider,
+        public events: Events,
+        public angularFireDatabase: AngularFireDatabase,
+        private _storage: Storage,
+        private translate: TranslateService,
+<<<<<<< HEAD
+        private _oneSignal: OneSignal,
+        private platform: Platform,
+=======
+        private platform: Platform,
+        private _oneSignal: OneSignal,
+        private _network: Network,
+        public user: UserProvider,
+        public officeProvider: OfficeServiceProvider
+>>>>>>> development
+    ) {
+        this.global = Global;
+        //listening to Resume & Pause events
+        this.events.subscribe('platform:onResumed', () => {
+            this.initData().catch(error => { });
+        });
+
+        //online offline
+        if (this.platform.is('cordova')) {
+            this._network.onchange().subscribe((status) => {
+                if (!_.isEmpty(this.connection.user)) {
+                    this.registerDevice();
+                }
+            });
+        }
+
+        this.events.subscribe('menu:created', (menu) => {
+            this.menu = menu;
+            //checking for height
+            this.availableCount = 0;
+            this.menu.forEach(item => {
+                if (this.availableTabs.indexOf(item.translate_key) > -1) {
+                    this.availableCount++;
+                }
+            });
+        });
+    }
+
+    //keep it enter only
+    ionViewDidEnter() {
+        //retrive pages
+        //checking if logged in
+        if (!_.isEmpty(this.connection.user)) {
+            this.initData().catch(error => { });
+        } else {
+            //waiting for login
+            this.events.subscribe('user:ready', (status) => {
+                if (status) {
+                    this.initData().catch(error => { });
+                }
+            });
+        }
+    }
+
+<<<<<<< HEAD
+    ionViewDidEnter() {
+        if (this.platform.is('cordova')) {
+            setTimeout(() => {
+                this._oneSignal.getIds().then((id) => {
+                    //updating user ID
+                    this.user.registerPushID(id.userId);
+                });
+            });
+        }
+    }
+
+    initData(event, refresh) {
+        //getting it from offline
+        this._storage.get('OfflineHome').then(home => {
+            if (home) {
+                this.data = home;
+            }
+        });
+        //user setting
+        this.user.getUser().then(user => {
+            this.Customer = user.Customer;
+            this.loginType = user.LoginTypeID;
+            if (this.loginType === Global.LoginType.Group) {
+                this.isDentalLogin = true;
+            } else {
+                this.isNormalLogin = true;
+            }
+            this.connectToFireBase(user.id);
+            this.markRefresherComplete(event);
+=======
+    initData() {
+        return new Promise((resolve, reject) => {
+            //getting it from offline
+            this._storage.get('OfflineHome').then(home => {
+                if (home) {
+                    this.data = home;
+                }
+            });
+            //user setting
+            this._storage.get('User').then(user => {
+                if (!_.isEmpty(user)) {
+                    this.Customer = user.Customer;
+                    this.loginType = user.LoginTypeID;
+                    if (this.loginType === Global.LoginType.Group) {
+                        this.isDentalLogin = true;
+                    } else {
+                        this.isNormalLogin = true;
+                    }
+                    this.connectToFireBase(user.id);
+
+                    //make device regsiter call
+                    this.registerDevice();
+                    resolve(user.id);
+                } else {
+                    reject(false);
+                }
+            }).catch(error => {
+                reject(false);
+            });
+>>>>>>> development
+        });
+    }
+
+    registerDevice() {
+        if (this.platform.is('mobileweb') || this.platform.is('core')) {
+            this.events.subscribe('pushid:created', (userId) => {
+                this.connectToServer(userId);
+            });
+        } else if (this.platform.is('cordova')) {
+            this.deviceRegsiter = 1;
+            this._oneSignal.getIds().then((id) => {
+                console.log(id);
+                this.connectToServer(id.userId);
+            }).catch(error => {
+                this.deviceRegsiter = 0;
+            });
+        }
+    }
+
+    connectToServer(pushID: string) {
+        this.user.registerPushID(pushID).then((response: any) => {
+            if (response.Data && response.Data.LastActivity) {
+                this.deviceRegsiter = 2;
+                this.connectedTime = response.Data.LastActivity;
+            } else {
+                this.deviceRegsiter = 0;
+            }
+        }).catch(error => {
+            this.deviceRegsiter = 0;
+        });
+    }
+
+    connectToFireBase(user_id) {
+        this.angularFireDatabase.object('Badge/' + user_id).snapshotChanges().subscribe(snapshot => {
+            snapshot = snapshot.payload.val();
+            if (snapshot) {
+                this.data = snapshot;
+            } else {
+                this.data = {
+                    PickUpCount: 0,
+                    CaseSearchCount: 0,
+                    CommunicationCount: 0,
+                    AlignersCount: 0,
+                }
+            }
+            //setting data for next use
+            this._storage.set('OfflineHome', this.data);
+        });
+    }
+
+    refresh(refresher) {
+        this.initData().then(user_id => {
+            refresher.complete();
+        }).catch(error => {
+            refresher.complete();
+        });
+    }
+
+    openDashboard() {
+        this.navCtrl.push(DashboardPage);
+    }
+
+    openPickup() {
+        this.navCtrl.push(PickupPage);
+    }
+
+    openCaseSearch() {
+        this.officeProvider.openOfficeListThenPage(CaseStatusPage, 'Case Status')
+    }
+
+    openCommunications() {
+        this.officeProvider.openOfficeListThenPage(CommunicationPage, 'Communication');
+    }
+
+    openAligners() {
+        this.officeProvider.openOfficeListThenPage(AlignersPage, 'Aligners');
+    }
+
+    isVisible(translate_key) {
+        for (let i = 0; i < this.menu.length; i++) {
+            if (this.menu[i].translate_key === translate_key) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    stillLoading() {
+        return this.loginType === 0 || this.menu === null;
+    }
+}

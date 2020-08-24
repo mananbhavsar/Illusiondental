@@ -1,0 +1,8 @@
+page-logout {
+    ion-content{
+        background: color($colors, primary) !important;
+        center-spinner{
+            height: 100%;
+        }
+    }
+}

@@ -1,0 +1,122 @@
+<ion-header no-border>
+    <header [title]="title" [subTitle]="patientCode" [buttons]="[{icon:'search'}]" (buttonClicked)="headerButtonClicked($event)"></header>
+    <div [hidden]="selectedOffice === {}" class="office">{{selectedOffice.CustomerName}}</div>
+    <ion-searchbar [placeholder]="'Common._Search_' | translate" [hidden]="showSearchBar" [(ngModel)]="searchText" (ionInput)="getItems(searchText)"
+        showCancelButton="true" (ionCancel)="onCancel()">
+    </ion-searchbar>
+    <ng-container *ngIf="!isAligner">
+        <ion-segment padding mode="ios" [(ngModel)]="selectedTab" color="casestatus" (ionChange)="segmentChanged($event)">
+            <ion-segment-button value="In Process">
+                {{'CaseStatus._InProcess_' | translate}}
+            </ion-segment-button>
+            <ion-segment-button value="Job Delivered">
+                {{'CaseStatus._RTD_' | translate}}
+            </ion-segment-button>
+            <ion-segment-button value="Job Dispatched">
+                {{'CaseStatus._Dispatched' | translate}}
+            </ion-segment-button>
+            <ion-segment-button value="All">
+                {{'CaseStatus._All_' | translate}}
+            </ion-segment-button>
+        </ion-segment>
+    </ng-container>
+</ion-header>
+<ion-content>
+    <center-spinner [hidden]="items"></center-spinner>
+    <ion-list class="cases">
+        <ion-item *ngFor="let item of items | orderBy:'ImpressionDateInMili':true;let i = index" [hidden]="isHidden(item.Status)"
+            (click)="openCase(item, i)" text-wrap>
+            <h2>
+                {{item.Patient}}
+                <ion-badge *ngIf="item.IsNew === 1 && item.Status === 'Job Dispatched' && [global.LoginType.Doctor, global.LoginType.Parent].indexOf(loginType) > -1"
+                    color="primary">
+                    {{'CaseStatus._NEW_' | translate}}
+                </ion-badge>
+            </h2>
+
+            <p>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            {{'CaseStatus._Doctor_' | translate}}
+                        </ion-col>
+                        <ion-col ion-note>{{item.Doctor}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            {{'CaseStatus._ImpressionNo_' | translate}}
+                        </ion-col>
+                        <ion-col ion-note>{{item.ImpressionNo}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            {{'CaseStatus._ReceivedDate_' | translate}}
+                        </ion-col>
+                        <ion-col ion-note>{{item.formatedImpressionDateTime}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            {{'CaseStatus._ExpectedDate_' | translate}}
+                        </ion-col>
+                        <ion-col ion-note>{{item.DueDate}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            {{'CaseStatus._ReferenceEntryNo' | translate}}
+                        </ion-col>
+                        <ion-col ion-note>{{item.ReferenceEntryNo}}</ion-col>
+                    </ion-row>
+                    <ion-row *ngIf="item.Aligners_Product">
+                        <ion-col style="font-weight: 600;">
+                            {{'CaseStatus._AlignersProduct' | translate}}
+                        </ion-col>
+                    </ion-row>
+                    <div class="html-div" [innerHtml]="item.Aligners_Product | safe">
+                    </div>
+                    <ion-row>
+                        <ion-col>
+                            {{'CaseStatus._Status_' | translate}}
+                        </ion-col>
+                        <ion-col ion-note [style.color]="item.ColorCode">{{item.Substatus}}</ion-col>
+                    </ion-row>
+                    <ion-row *ngIf="item.Status == 'In Process' && item.ProgressDetail">
+                        <ion-col>
+                            {{'CaseStatus._ProgressDetail_' | translate}}
+                        </ion-col>
+                        <ion-col ion-note [ngClass]="getStatusColor(item.Status)">{{item.ProgressDetail}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col text-left *ngIf="isFeedbackVisible(item)">
+                            <button ion-button color="casestatus" icon-left small (click)="openFeedbackForm(item,$event)">
+                                <ion-icon *ngIf="item.Feedback_Given === 'Yes'" name="checkmark"></ion-icon>
+                                {{'CaseStatus._feedback' | translate}}
+                            </button>
+                            <!-- <button ion-button color="casestatus" icon-left small (click)="openRx(item, i, $event)">
+                                <ion-icon name="ios-paper"></ion-icon>
+                                {{'CaseStatus._OpenRx_' | translate}}
+                            </button> -->
+                        </ion-col>
+                        <ion-col text-right *ngIf="global && [global.LoginType.Doctor, global.LoginType.Parent].indexOf(loginType) > -1">
+                            <button ion-button color="dashboard" icon-left small (click)="openChat(item, i, $event)">
+                                <ion-icon name="ios-chatbubbles"></ion-icon>
+                                {{'CaseStatus._ClickToCommunicate_' | translate}}
+                            </button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </p>
+            <ion-icon name="ios-arrow-forward" item-end></ion-icon>
+        </ion-item>
+    </ion-list>
+
+    <ion-item-divider text-center color="light" *ngIf="page === -1">
+        {{'Common._NothingToShow_' | translate}}
+        <ion-icon name="md-sad-outline"></ion-icon>
+    </ion-item-divider>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="hasInternet && page > -1">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <ion-fab right bottom>
+        <call-fab type="CaseStatus"></call-fab>
+    </ion-fab>
+</ion-content>

@@ -1,0 +1,289 @@
+<ion-header>
+  <modal-toolbar color="casestatus" [title]="title" [subTitle]="subTitle" (dismiss)="dismiss($event)"></modal-toolbar>
+</ion-header>
+<ion-content no-padding>
+  <center-spinner *ngIf="feedbackData === null;else fetched"></center-spinner>
+  <ng-template #fetched>
+    <ng-container *ngIf="!isEmpty(feedbackData);else feedbackForm">
+      <ion-grid>
+        <ion-row *ngIf="feedbackData.OverallFit">
+          <ion-col col-5>
+            <ion-label>OverAll Fit</ion-label>
+          </ion-col>
+          <ion-col [ngSwitch]="feedbackData.OverallFit">
+            <ion-label *ngSwitchCase="1">Tight</ion-label>
+            <ion-label *ngSwitchCase="2">Good</ion-label>
+            <ion-label *ngSwitchCase="3">Passive</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="feedbackData.Occlusion">
+          <ion-col col-5>
+            <ion-label>Occlusion</ion-label>
+          </ion-col>
+          <ion-col [ngSwitch]="feedbackData.Occlusion">
+            <ion-label *ngSwitchCase="1">High</ion-label>
+            <ion-label *ngSwitchCase="2">Good</ion-label>
+            <ion-label *ngSwitchCase="3">Infra</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="feedbackData.InterProximalContact">
+          <ion-col col-5>
+            <ion-label>InterProximal Contact</ion-label>
+          </ion-col>
+          <ion-col [ngSwitch]="feedbackData.InterProximalContact">
+            <ion-label *ngSwitchCase="1">Heavy</ion-label>
+            <ion-label *ngSwitchCase="2">Good</ion-label>
+            <ion-label *ngSwitchCase="3">Light</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="feedbackData.MarginalAccuracy">
+          <ion-col col-5>
+            <ion-label>Marginal Accuracy</ion-label>
+          </ion-col>
+          <ion-col [ngSwitch]="feedbackData.MarginalAccuracy">
+            <ion-label *ngSwitchCase="1">Heavy</ion-label>
+            <ion-label *ngSwitchCase="2">Good</ion-label>
+            <ion-label *ngSwitchCase="3">Short</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="feedbackData.ShadeAccuracy">
+          <ion-col col-5>
+            <ion-label>Shade Accuracy</ion-label>
+          </ion-col>
+          <ion-col [ngSwitch]="feedbackData.ShadeAccuracy">
+            <ion-label *ngSwitchCase="1">Dark</ion-label>
+            <ion-label *ngSwitchCase="2">Good</ion-label>
+            <ion-label *ngSwitchCase="3">Light</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="feedbackData.AnatomyContour">
+          <ion-col col-5>
+            <ion-label>Anatomy Contour</ion-label>
+          </ion-col>
+          <ion-col [ngSwitch]="feedbackData.AnatomyContour">
+            <ion-label *ngSwitchCase="1">Too Much</ion-label>
+            <ion-label *ngSwitchCase="2">Natural</ion-label>
+            <ion-label *ngSwitchCase="3">Too Little</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="feedbackData.PrescriptionFollowed">
+          <ion-col col-5>
+            <ion-label>Prescription Followed</ion-label>
+          </ion-col>
+          <ion-col [ngSwitch]="feedbackData.PrescriptionFollowed">
+            <ion-label *ngSwitchCase="1">Poor</ion-label>
+            <ion-label *ngSwitchCase="2">Average</ion-label>
+            <ion-label *ngSwitchCase="3">Excellent</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="feedbackData.PatientSatisfaction">
+          <ion-col col-5>
+            <ion-label>Patient Satisfaction</ion-label>
+          </ion-col>
+          <ion-col [ngSwitch]="feedbackData.PatientSatisfaction">
+            <ion-label *ngSwitchCase="1">Happy</ion-label>
+            <ion-label *ngSwitchCase="2">Satisfied</ion-label>
+            <ion-label *ngSwitchCase="3">Acceptable</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="feedbackData.TotalSeatingTime">
+          <ion-col col-5>
+            <ion-label>Total Seating Time</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-label>{{feedbackData.TotalSeatingTime}}</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="feedbackData.Rating">
+          <ion-col col-5>
+            <ion-label>Rating</ion-label>
+          </ion-col>
+          <ion-col>
+            <rating [value]="feedbackData.Rating"></rating>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="feedbackData.Comments">
+          <ion-col col-5>
+            <ion-label>Comments</ion-label>
+          </ion-col>
+          <ion-col text-wrap>
+            <ion-label>{{feedbackData.Comments}}</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="feedbackData.Attachments">
+          Attachments
+        </ion-row>
+        <ion-row *ngIf="feedbackData.Attachments">
+          <attachment [editable]="false" [attachments]="attachments"></attachment>
+        </ion-row>
+      </ion-grid>
+    </ng-container>
+    <ng-template #feedbackForm>
+      <form>
+        <ion-list-header>
+          OverAll Fit :
+        </ion-list-header>
+        <ion-list no-lines radio-group name="OverallFit" [(ngModel)]="formData.OverallFit" (ionChange)="overallFit($event)">
+          <ion-item>
+            <ion-label>Tight</ion-label>
+            <ion-radio value="1"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Good</ion-label>
+            <ion-radio value="2"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Passive</ion-label>
+            <ion-radio value="3"></ion-radio>
+          </ion-item>
+        </ion-list>
+        <ion-list-header>
+          Occlusion :
+        </ion-list-header>
+        <ion-list no-lines radio-group class="optionsList" name="Occlusion" [(ngModel)]="formData.Occlusion" (ionChange)="Occlusion($event)">
+          <ion-item no-line>
+            <ion-label>High</ion-label>
+            <ion-radio value=1></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label no-lines>Good</ion-label>
+            <ion-radio value=2></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Infra</ion-label>
+            <ion-radio value=3></ion-radio>
+          </ion-item>
+        </ion-list>
+        <ion-list-header>
+          Interproximal Contact :
+        </ion-list-header>
+        <ion-list no-lines radio-group class="optionsList" name="InterProximalContact" [(ngModel)]="formData.InterProximalContact"
+          (ionChange)="InterProximalContact($event)">
+          <ion-item>
+            <ion-label>Heavy</ion-label>
+            <ion-radio value=1></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Good</ion-label>
+            <ion-radio value=2></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Light</ion-label>
+            <ion-radio value=3></ion-radio>
+          </ion-item>
+        </ion-list>
+        <ion-list-header>
+          Marginal Accuracy :
+        </ion-list-header>
+        <ion-list no-lines radio-group class="optionsList" name="MarginalAccuracy" [(ngModel)]="formData.MarginalAccuracy" (ionChange)="MarginalAccuracy($event)">
+          <ion-item [ngStyle]="{'min-width': '160px'}">
+            <ion-label>Overextended</ion-label>
+            <ion-radio value=1></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Good</ion-label>
+            <ion-radio value=2></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Short</ion-label>
+            <ion-radio value=3></ion-radio>
+          </ion-item>
+        </ion-list>
+        <ion-list-header>
+          Shade Accuracy :
+        </ion-list-header>
+        <ion-list no-lines radio-group class="optionsList" name="ShadeAccuracy" [(ngModel)]="formData.ShadeAccuracy" (ionChange)="ShadeAccuracy($event)">
+          <ion-item>
+            <ion-label>Dark</ion-label>
+            <ion-radio value=1></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Good</ion-label>
+            <ion-radio value=2></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Light</ion-label>
+            <ion-radio value=3></ion-radio>
+          </ion-item>
+        </ion-list>
+        <ion-list-header>
+          Anatomy & Contour :
+        </ion-list-header>
+        <ion-list no-lines radio-group class="optionsList" name="AnatomyContour" [(ngModel)]="formData.AnatomyContour" (ionChange)="AnatomyContour($event)">
+          <ion-item>
+            <ion-label>Too Much</ion-label>
+            <ion-radio value=1></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Natural</ion-label>
+            <ion-radio value=2></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Too Little</ion-label>
+            <ion-radio value=3></ion-radio>
+          </ion-item>
+        </ion-list>
+        <ion-list-header>
+          Prescription Followed :
+        </ion-list-header>
+        <ion-list no-lines radio-group class="optionsList" name="PrescriptionFollowed" [(ngModel)]="formData.PrescriptionFollowed"
+          (ionChange)="PrescriptionFollowed($event)">
+          <ion-item>
+            <ion-label>Poor</ion-label>
+            <ion-radio value=1></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Average</ion-label>
+            <ion-radio value=2></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Excellent</ion-label>
+            <ion-radio value=3></ion-radio>
+          </ion-item>
+        </ion-list>
+        <ion-list-header>
+          Patient Satisfaction :
+        </ion-list-header>
+        <ion-list no-lines radio-group class="optionsList" name="PatientSatisfaction" [(ngModel)]="formData.PatientSatisfaction"
+          (ionChange)="PatientSatisfaction($event)">
+          <ion-item>
+            <ion-label>Happy</ion-label>
+            <ion-radio value=1></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Satisfied</ion-label>
+            <ion-radio value=2></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Acceptable</ion-label>
+            <ion-radio value=3></ion-radio>
+          </ion-item>
+        </ion-list>
+        <ion-list-header>
+          Total Seating Time
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Select Seating Time</ion-label>
+          <ion-datetime displayFormat="HH:mm" name="TotalSeatingTime" [(ngModel)]="formData.TotalSeatingTime"></ion-datetime>
+        </ion-item>
+        <ion-list-header>
+          Comments
+        </ion-list-header>
+        <ion-item>
+          <ion-textarea name="Comments" [(ngModel)]="formData.Comments" type="text" placeholder="Enter Comments"></ion-textarea>
+        </ion-item>
+        <ion-list-header>
+          Rate
+        </ion-list-header>
+        <div>
+          <rating [readOnly]="false" [value]="" (clicked)="starClicked($event)"></rating>
+        </div>
+        <ion-list-header *ngIf="!isBrowser">
+          Attachment
+        </ion-list-header>
+        <attachment *ngIf="!isBrowser" [editable]="true" [attachments]="attachments" (captured)="captured($event)" (removed)="removeAttachment($event)"></attachment>
+        <button ion-button color="casestatus" (click)="submitFeedback()" [hidden]="btnActive === 'true'" block>Sends</button>
+      </form>
+    </ng-template>
+  </ng-template>
+</ion-content>

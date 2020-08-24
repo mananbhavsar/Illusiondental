@@ -1,0 +1,23 @@
+page-contact-us {
+    .slide_header {
+        p {
+            color: #8a949d;
+            float: right;
+            margin-right: -2rem;
+            margin-top: 1rem;
+        }
+        #login-box {
+            width: 80%;
+            margin: 0 auto;
+            form {
+                width: 100%;
+            }
+        }
+    }
+    a {
+        color: #303a46;
+        text-decoration: none;
+        margin-top: 1rem;
+        display: block;
+    }
+}

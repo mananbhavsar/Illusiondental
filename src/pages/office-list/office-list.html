@@ -1,0 +1,25 @@
+<ion-header no-border>
+  <header [title]="'OfficeList._SelectOffice_' | translate" [subTitle]="page" [badgeCount]="unReadCount">
+  </header>
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="searchText" showCancelButton="true" (ionInput)="onSearchInput($event)">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item class="list_wrap" *ngFor="let office of officeList;trackBy:getTrackByField" (click)="selectOffice(office)">
+      <h2 [innerHTML]="office.CustomerName | highlight:searchText"></h2>
+      <p *ngIf="office.InProcessCount" class="pending-count">
+        Pending: {{office.InProcessCount}}
+      </p>
+      <ion-badge item-end color="primary" *ngIf="office.Count">{{office.Count}}</ion-badge>
+    </ion-item>
+    <ion-item-divider text-center *ngIf="showNoMoreOffices" no-padding color="light">
+      {{'Common._NothingToShow_' | translate}}
+    </ion-item-divider>
+  </ion-list>
+  <ion-infinite-scroll *ngIf="readyForPagination && !showNoMoreOffices" (ionInfinite)="paginate($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

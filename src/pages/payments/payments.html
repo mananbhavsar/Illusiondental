@@ -1,0 +1,40 @@
+<ion-header no-border>
+  <header [title]="title"></header>
+  <!-- <div [hidden]="selectedOffice === {}" class="office">{{selectedOffice?.CustomerName}}</div> -->
+  <div class="sub-heading">Last six payments</div>
+</ion-header>
+<ion-content>
+  <center-spinner [hidden]="items"></center-spinner>
+  <ion-list class="cases">
+    <ion-item *ngFor="let item of items;let i = index" text-wrap>
+      <h2>
+        {{item.ReceiptNo}}
+      </h2>
+      <p>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              {{'Payments._ReceiptAmount_' | translate}}
+            </ion-col>
+            <ion-col ion-note>{{item.ReceiptAmount}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              {{'Payments._ReceiptDate_' | translate}}
+            </ion-col>
+            <ion-col ion-note>{{item.ReceiptDate}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              {{'Payments._ReceiptNo_' | translate}}
+            </ion-col>
+            <ion-col ion-note>{{item.ReceiptNo}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </p>
+    </ion-item>
+  </ion-list>
+  <ion-fab right bottom>
+    <call-fab type="Payments"></call-fab>
+</ion-fab>
+</ion-content>

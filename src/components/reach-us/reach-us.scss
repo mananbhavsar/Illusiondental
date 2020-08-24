@@ -1,0 +1,19 @@
+reach-us {
+    .footer {
+        ion-icon {
+            font-size: 4rem;
+            &:first-child {
+                margin-right: 7rem;
+            }
+        }
+        p {
+            color: #8a949d;
+            margin-top: 0.5em !important;
+            float: none !important;
+            text-align: center;
+            a {
+                display: inline;
+            }
+        }
+    }
+}
