@@ -118,7 +118,7 @@
     "ionic-img-viewer": "^2.9.0",
     "ionic2-auto-complete-ng5": "^1.0.3-release",
     "ionicons": "^3.0.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "mime-db": "^1.37.0",
     "mime-types": "^2.1.18",
     "moment": "^2.20.1",
