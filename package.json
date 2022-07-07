@@ -121,7 +121,7 @@
     "lodash": "^4.17.11",
     "mime-db": "^1.37.0",
     "mime-types": "^2.1.18",
-    "moment": "^2.20.1",
+    "moment": "^2.29.4",
     "ng-elastic": "^1.0.0-beta.5",
     "ngx-order-pipe": "^2.0.1",
     "node-sass": "^4.10.0",
